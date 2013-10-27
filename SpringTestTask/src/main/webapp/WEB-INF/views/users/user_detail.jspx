@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:form="http://www.springframework.org/tags/form"
+	xmlns:spring="http://www.springframework.org/tags" version="2.0">
+	<jsp:directive.page contentType="text/html; charset=UTF-8"
+		pageEncoding="UTF-8" session="false" />
+	<jsp:output doctype-root-element="html"
+		doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
+		doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+		omit-xml-declaration="true" />
+	<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<spring:url value="/users" var="editUserUrl" />
+<spring:url value="/bookFromArchive" var="getBookUrl" />
+
+
+<LINK rel="stylesheet" type="text/css" media="screen"
+	href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" />
+
+<title>User details</title>
+</head>
+<body>
+	<div class="container">
+		<h3>User details:</h3>
+		
+			<c:if test="${not empty errors}">
+				<div class="alert alert-danger">
+					<c:forEach items="${errors}" var="error">
+						<tr>
+							<li>${error}</li>
+						</tr>
+					</c:forEach>
+				</div>
+			</c:if>
+
+			<table class="table table-bordered">
+				<tbody>
+				
+				<form:form modelAttribute="user" id="userUpdateForm" method="POST">
+					<tr>
+						<form:hidden path="id" />
+						<td>Id:</td>
+						<td>${user.id}</td>
+						<td>Archive: select books for get!</td>
+					</tr>
+					
+					<tr>
+						<td>Name:</td>
+
+						<td><form:input type="text" name="userName"
+								class="form-control" path="name" /></td>
+									
+									
+						<td rowspan="5">
+
+							<ul>
+								<c:forEach items="${bookArhive}" var="book">
+									<li><form:checkbox   path="idsBooksForGet"
+										value="${book.id}" />${book.id} ${book.tittle}</li>
+								</c:forEach>
+
+							</ul> 
+						</td>
+
+							</tr>		
+					<tr>
+						<td>Age:</td>
+						<td><form:input type="text" name="userAge"
+								class="form-control" path="age" /></td>
+					</tr>
+					<tr>
+						<td>Active:</td>
+						<td><form:checkbox name="userActivity" path="active" /></td>
+					</tr>
+						
+					<tr>
+						<td>Books:</td>
+						<td>
+							<table class="table table-bordered">
+								<thead>
+									<tr>
+										<td>Id</td>
+										<td>Title</td>
+										<td>Select books for reject</td>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach items="${books.bookList}" var="book">
+										<tr>
+											<td>${book.id}</td>
+											<td>${book.tittle}</td>
+											<td><form:checkbox path= "idsBooksForRej"
+												 value="${book.id}" /></td>
+										</tr>
+									</c:forEach>
+									
+								</tbody>
+
+							</table>
+						</td>
+
+					</tr>
+
+					<tr>
+						<td></td>
+						<td><input type="submit" class="btn btn-primary"
+							name="saveBtn" value="Save" /> <a href="${editUserUrl}"
+							class="btn btn-info">Back to the list</a></td>
+					</tr>
+					</form:form>
+				
+		
+			
+</tbody>
+			</table>
+	
+	</div>
+</body>
+
+	</html>
+</jsp:root>

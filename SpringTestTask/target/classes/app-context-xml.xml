@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context-3.1.xsd
+http://www.springframework.org/schema/util
+http://www.springframework.org/schema/util/spring-util-3.1.xsd">
+
+	<bean id="book1" class="com.kostiushko.springTestTask.domain.Book">
+		<property name="id">
+			<value>1</value>
+		</property>
+		<property name="tittle">
+			<value> first book </value>
+		</property>
+	</bean>
+
+	<bean id="book2" class="com.kostiushko.springTestTask.domain.Book">
+		<property name="id">
+			<value>2</value>
+		</property>
+		<property name="tittle">
+			<value>second book </value>
+		</property>
+	</bean>
+
+	<bean id="book3" class="com.kostiushko.springTestTask.domain.Book">
+		<property name="id">
+			<value>3</value>
+		</property>
+		<property name="tittle">
+			<value> third book </value>
+		</property>
+	</bean>
+
+	<bean id="book4" class="com.kostiushko.springTestTask.domain.Book">
+		<property name="id">
+			<value>4</value>
+		</property>
+		<property name="tittle">
+			<value>fourth book </value>
+		</property>
+	</bean>
+
+	<bean id="book5" class="com.kostiushko.springTestTask.domain.Book">
+		<property name="id">
+			<value>5</value>
+		</property>
+		<property name="tittle">
+			<value> fifth book </value>
+		</property>
+	</bean>
+
+	<bean id="book6" class="com.kostiushko.springTestTask.domain.Book">
+		<property name="id">
+			<value>6</value>
+		</property>
+		<property name="tittle">
+			<value> sixth book </value>
+		</property>
+	</bean>
+
+	<bean id="book7" class="com.kostiushko.springTestTask.domain.Book">
+		<property name="id">
+			<value>7</value>
+		</property>
+		<property name="tittle">
+			<value> seventh book </value>
+		</property>
+	</bean>
+
+	<bean id="book8" class="com.kostiushko.springTestTask.domain.Book">
+		<property name="id">
+			<value>8</value>
+		</property>
+		<property name="tittle">
+			<value> eighth book </value>
+		</property>
+	</bean>
+
+	<bean id="book9" class="com.kostiushko.springTestTask.domain.Book">
+		<property name="id">
+			<value>9</value>
+		</property>
+		<property name="tittle">
+			<value> ninth book </value>
+		</property>
+	</bean>
+
+	<bean id="book10" class="com.kostiushko.springTestTask.domain.Book">
+		<property name="id">
+			<value>10</value>
+		</property>
+		<property name="tittle">
+			<value> tenth book </value>
+		</property>
+	</bean>
+
+	<bean id="book11" class="com.kostiushko.springTestTask.domain.Book">
+		<property name="id">
+			<value>11</value>
+		</property>
+		<property name="tittle">
+			<value> eleventh book </value>
+		</property>
+	</bean>
+
+	<bean id="book12" class="com.kostiushko.springTestTask.domain.Book">
+		<property name="id">
+			<value>12</value>
+		</property>
+		<property name="tittle">
+			<value> 12-th book </value>
+		</property>
+	</bean>
+
+	<bean id="book13" class="com.kostiushko.springTestTask.domain.Book">
+		<property name="id">
+			<value>13</value>
+		</property>
+		<property name="tittle">
+			<value> 13-th book </value>
+		</property>
+	</bean>
+
+	<bean id="book14" class="com.kostiushko.springTestTask.domain.Book">
+		<property name="id">
+			<value>14</value>
+		</property>
+		<property name="tittle">
+			<value> 14-th book </value>
+		</property>
+	</bean>
+
+	<bean id="book15" class="com.kostiushko.springTestTask.domain.Book">
+		<property name="id">
+			<value>15</value>
+		</property>
+		<property name="tittle">
+			<value> 15-th book </value>
+		</property>
+	</bean>
+
+	<bean id="user" name="kolya" class="com.kostiushko.springTestTask.domain.User">
+		<property name="name">
+			<value>Kolya</value>
+		</property>
+		<property name="id">
+			<value>1</value>
+		</property>
+		<property name="age">
+			<value>18</value>
+		</property>
+		<property name="books">
+			<list>
+				<ref local="book1" />
+				<ref local="book2" />
+				<ref local="book3" />
+			</list>
+		</property>
+	</bean>
+	<bean id="user1" name="wise" class="com.kostiushko.springTestTask.domain.User">
+		<property name="name">
+			<value>Tom</value>
+		</property>
+		<property name="id">
+			<value>2</value>
+		</property>
+		<property name="age">
+			<value>14</value>
+		</property>
+		<property name="books">
+			<list>
+				<ref local="book5" />
+				<ref local="book4" />
+
+			</list>
+		</property>
+	</bean>
+	<bean id="user2" name="max" class="com.kostiushko.springTestTask.domain.User">
+		<property name="name">
+			<value>Max</value>
+		</property>
+		<property name="id">
+			<value>3</value>
+		</property>
+		<property name="age">
+			<value>22</value>
+		</property>
+		<property name="books">
+			<list>
+				<ref local="book6" />
+				<ref local="book7" />
+
+			</list>
+		</property>
+	</bean>
+	<bean id="user3" name="vasya" class="com.kostiushko.springTestTask.domain.User">
+		<property name="name">
+			<value>Vasya</value>
+		</property>
+		<property name="id">
+			<value>4</value>
+		</property>
+		<property name="age">
+			<value>18</value>
+		</property>
+		<property name="books">
+			<list>
+			<ref local="book8" />
+
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="user4" name="dimas" class="com.kostiushko.springTestTask.domain.User">
+		<property name="name">
+			<value>Dimas</value>
+		</property>
+		<property name="id">
+			<value>5</value>
+		</property>
+		<property name="age">
+			<value>30</value>
+		</property>
+		<property name="books">
+			<list>
+				<ref local="book10" />
+
+
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userService" class="com.kostiushko.springTestTask.service.UserServiceImpl">
+		<property name="userBase">
+			<map>
+				<entry key="1">
+					<ref local="user" />
+				</entry>
+				<entry key="2">
+					<ref local="user1" />
+				</entry>
+				<entry key="3">
+					<ref local="user2" />
+				</entry>
+				<entry key="4">
+					<ref local="user3" />
+				</entry>
+				<entry key="5">
+					<ref local="user4" />
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="arhiveBook" class="com.kostiushko.springTestTask.domain.BookArhive">
+		<property name="arhive">
+			<list>
+				<ref local="book6" />
+				<ref local="book7" />
+				<ref local="book8" />
+				<ref local="book9" />
+				<ref local="book10" />
+				<ref local="book11" />
+				<ref local="book12" />
+				<ref local="book13" />
+				<ref local="book14" />
+				<ref local="book15" />
+			</list>
+		</property>
+	</bean>
+</beans>
