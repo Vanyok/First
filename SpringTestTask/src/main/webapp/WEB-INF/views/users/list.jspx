@@ -12,6 +12,7 @@
 <spring:url value="/${app_css}" var="app_css_url" />
 <spring:url value="/users" var="editUserUrl" />
 <spring:url value="/users/remove" var="removeUserUrl" />
+<spring:url value="/DB" var="dbUserUrl" />
 <LINK rel="stylesheet" type="text/css" media="screen"
 	href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" />
 
@@ -59,6 +60,8 @@
 				</tbody>
 			</table>
 		</c:if>
+		
+		<a href="${dbUserUrl}" type="button" class="btn btn-success">DB</a>
 	</div>
 </body>
 

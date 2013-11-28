@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:form="http://www.springframework.org/tags/form"
+	xmlns:spring="http://www.springframework.org/tags">
+	<jsp:directive.page contentType="text/html; charset=UTF-8"
+		pageEncoding="UTF-8" session="false" />
+	<jsp:output doctype-root-element="html"
+		doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
+		doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+		omit-xml-declaration="true" />
+	<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<spring:theme code="styleSheet" var="app_css" />
+<spring:url value="/users" var="backUserUrl" />
+<LINK rel="stylesheet" type="text/css" media="screen"
+	href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" />
+
+<title>UserDB</title>
+</head>
+<body>
+	<div class="panel panel-info">
+		<div class="panel-heading">
+			<h3 class="panel-title">USERS:</h3>
+		</div>
+		<div class="container">
+			<h3>Users:</h3>
+			<c:if test="${not empty dbPanel.users}">
+				<table class="table table-hover table-bordered">
+					<thead>
+						<tr>
+							<td>Id</td>
+							<td>Name</td>
+							<td>Age</td>
+							<td>Active</td>
+							<td>Books</td>
+
+						</tr>
+					</thead>
+					<tbody>
+
+						<c:forEach items="${dbPanel.users}" var="user">
+							<tr>
+								<td>${user.id}</td>
+								<td>${user.name}</td>
+								<td>${user.age}</td>
+								<td>${user.active}</td>
+								<td>
+									<ul>
+
+										<c:forEach items="${user.books}" var="book">
+											<li>${book.tittle}"</li>
+										</c:forEach>
+									</ul>
+								</td>
+
+							</tr>
+						</c:forEach>
+
+					</tbody>
+				</table>
+			</c:if>
+		</div>
+	</div>
+
+
+
+	<div class="panel panel-success">
+		<div class="panel-heading">
+			<h3 class="panel-title">Create USER</h3>
+		</div>
+		<div class="panel-body">
+			<form:form modelAttribute="dbPanel" method="POST">
+
+				<table class="table table-hover table-bordered">
+
+					<TBODY>
+
+
+						<tr>
+							
+							<td>
+								<div class="panel panel-default">
+
+									<div class="panel-heading">
+										<h3 class="panel-title">name</h3>
+									</div>
+									<div class="panel-body">
+										<form:input type="text" name="name" class="form-control"
+											path="name" />
+									</div>
+
+								</div>
+							</td>
+							<td>
+								<div class="panel panel-default">
+
+									<div class="panel-heading">
+										<h3 class="panel-title">age</h3>
+									</div>
+
+									<div class="panel-body">
+										<input type="text" name="age" class="form-control" path="age" />
+									</div>
+
+								</div>
+							</td>
+
+						</tr>
+
+
+					</TBODY>
+				</table>
+
+				<tr>
+					<input type="submit" class="btn btn-success"
+							name="saveBtn" value="Create User" />
+
+				</tr>
+
+				<tr>
+					<a href="${backUserUrl}" type="button" class="btn btn-success">Back To The List</a>
+
+				</tr>
+				</form:form>
+		</div>
+		
+	</div>
+
+
+</body>
+	</html>
+</jsp:root>

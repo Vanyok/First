@@ -20,8 +20,8 @@ import com.kostiushko.springTestTask.domain.Book;
 import com.kostiushko.springTestTask.domain.BookArhive;
 import com.kostiushko.springTestTask.domain.BookList;
 import com.kostiushko.springTestTask.domain.User;
+import com.kostiushko.springTestTask.service.CollectionStorage;
 import com.kostiushko.springTestTask.service.Jsr303Validator;
-import com.kostiushko.springTestTask.service.UserService;
 
 @RequestMapping("/users")
 @Controller
@@ -29,25 +29,26 @@ import com.kostiushko.springTestTask.service.UserService;
 public class UserController {
 
     private Jsr303Validator validator = new Jsr303Validator();
+    private CollectionStorage storage;
 
     public UserController() {
+
 	GenericXmlApplicationContext ctx = new GenericXmlApplicationContext();
 	ctx.load("classpath:\\app-context-xml.xml");
 	ctx.refresh();
 
-	userService = (UserService) ctx.getBean("userService");
+	storage = CollectionStorage.getInstance();
 	bookArhive = (BookArhive) ctx.getBean("arhiveBook");
 
 	ctx.close();
     }
 
-    private UserService userService;
     private BookArhive bookArhive;
 
     @RequestMapping(method = RequestMethod.GET)
     public String listUsers(Model uiModel) {
 
-	Collection<User> users = userService.listUser().values();
+	Collection<User> users = storage.getAllUsers();
 	uiModel.addAttribute("users", users);
 
 	return "users/list";
@@ -56,7 +57,7 @@ public class UserController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String show(@PathVariable("id") Integer id, Model uiModel) {
 
-	User user = userService.getUser(id);
+	User user = storage.getUser(id);
 	BookList books = new BookList();
 	books.setBookList((ArrayList<Book>) user.getBooks());
 	uiModel.addAttribute("books", books);
@@ -69,12 +70,10 @@ public class UserController {
 
     @RequestMapping(value = "/remove/{id}", method = RequestMethod.GET)
     public String remove(@PathVariable("id") Integer id, Model uiModel) {
-	User user = userService.getUser(id);
+	User user = storage.getUser(id);
 	bookArhive.addBooks(user.getBooks());
-	userService.removeUser(id);
-	Collection<User> users = userService.listUser().values();
-	uiModel.addAttribute("users", users);
-	return "users/list";
+	storage.removeUser(id);
+	return listUsers(uiModel);
     }
 
     @RequestMapping(value = "/{id}", params = "form", method = RequestMethod.POST)
@@ -84,15 +83,13 @@ public class UserController {
 
 	if (bindingResult.hasFieldErrors()) {
 	    System.out.println(bindingResult.getAllErrors());
-	    Collection<User> users = userService.listUser().values();
-	    uiModel.addAttribute("users", users);
-	    return "users/list";
+	    return listUsers(uiModel);
 	}
 	BookList books = new BookList();
 	uiModel.asMap().clear();
 	User userForUpdate = null;
 
-	userForUpdate = userService.getUser(user.getId());
+	userForUpdate = storage.getUser(user.getId());
 	ArrayList<String> errorList = validator.validate(user);
 	if (errorList.size() > 0) {
 	    books.setBookList((ArrayList<Book>) userForUpdate.getBooks());
@@ -113,11 +110,9 @@ public class UserController {
 	userForUpdate.setAge(user.getAge());
 	userForUpdate.setName(user.getName());
 
-	userService.addUser(userForUpdate);
+	storage.addUser(userForUpdate);
 
-	Collection<User> users = userService.listUser().values();
-	uiModel.addAttribute("users", users);
-	return "users/list";
+	return listUsers(uiModel);
     }
 
     private User bookArhiveUpdate(User user) {
@@ -128,6 +123,8 @@ public class UserController {
 
 	if (idsBooksForGet != null) {
 	    for (Integer id : idsBooksForGet) {
+		System.out.println(id);
+		System.out.println("Book Archive: " + bookArhive);
 		usersBooks.addBook(bookArhive.getBook(id));
 	    }
 	}
